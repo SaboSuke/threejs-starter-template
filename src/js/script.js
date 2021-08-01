@@ -1,8 +1,10 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.module.js'
 import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js'
+import Shaders from './shaders.js'
 
-class Animate{
+export default class Animate extends Shaders{
     constructor() {
+        super()
         this.initVars()
 
         this.camera = new THREE.PerspectiveCamera(75, this.sizes.width / this.sizes.height, 0.1, 100)
@@ -16,7 +18,8 @@ class Animate{
         document.querySelector('.container').appendChild(this.renderer.domElement)
         // this.controls = new OrbitControls(this.camera, this.renderer.domElement)
         
-        this.initShaders()
+        this.mouse = new THREE.Vector2()
+        this.time = 0
         this.addMesh()
         this.addLights()
 
@@ -46,19 +49,9 @@ class Animate{
         })
 
         window.addEventListener('mousemove', (e) => {
-            this.mouse.x = (e.clientX / window.innerWidth) * 2 - 1
-            this.mouse.y = -(e.clientY / window.innerHeight) * 2 + 1
+            this.mouse.x = (e.clientX / this.sizes.width) * 2 - 1
+            this.mouse.y = -(e.clientY / this.sizes.height) * 2 + 1
         }, false)
-    }
-
-    initShaders(){
-        this.vertex = `
-            
-        `
-
-        this.fragment = `
-            
-        `
     }
 
     addMesh(){
