@@ -6,13 +6,17 @@ export default class Shaders{
 
     initFragment(){
         this.fragment = `
-            
+            void main(){
+                
+            }
         `
     }
 
     initVertex(){
         this.vertex = `
-            
+            void main(){
+                
+            }
         `
     }
 }

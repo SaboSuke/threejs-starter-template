@@ -2,11 +2,27 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.m
 import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js'
 import Shaders from './shaders.js'
 
+function rand(a, b){
+    return a + (b-a) * Math.random()
+}
+
 export default class Animate extends Shaders{
     constructor() {
         super()
-        this.initVars()
 
+        this.initGlobalVars()
+        this.initScene()
+        
+        this.addMesh()
+        this.addLights()
+
+        this.mouseEvents()
+        this.render()
+        // this.settings()
+    }
+
+
+    initScene(){
         this.camera = new THREE.PerspectiveCamera(75, this.sizes.width / this.sizes.height, 0.1, 100)
         this.camera.position.x = 0
         this.camera.position.y = 0
@@ -17,25 +33,18 @@ export default class Animate extends Shaders{
         this.renderer.setSize(window.innerWidth, window.innerHeight)
         document.querySelector('.container').appendChild(this.renderer.domElement)
         // this.controls = new OrbitControls(this.camera, this.renderer.domElement)
-        
-        this.mouse = new THREE.Vector2()
-        this.time = 0
-        this.addMesh()
-        this.addLights()
-
-        this.mouseEffect()
-        this.render()
-        // this.settings()
     }
 
-    initVars(){
+    initGlobalVars(){
         this.sizes = {
             width: window.innerWidth,
             height: window.innerHeight
         }
+        this.mouse = new THREE.Vector2()
+        this.time = 0
     }
 
-    mouseEffect(){
+    mouseEvents(){
         window.addEventListener('mousedown', (e) => {
             
         })
